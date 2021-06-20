@@ -5,6 +5,6 @@
 #include <stdlib.h>
 
 struct Graph *create_graph(int V);
-void delete_graph(struct Graph *G);
+void delete_graph(struct Graph *G, int V);
 
 #endif

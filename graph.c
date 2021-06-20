@@ -1,39 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Смежная вершина и вес ребра до неё
-struct AdjVertex{
-    int dest; // Номер смежной вершины
-    int wt; // Вес ребра до смежной вершины
-};
-
-// Список смежных вершин для данной вершины
-struct AdjList{
-    struct AdjVertex *list; 
-};
-
 // Структура граф
 struct Graph{
     int V; // Количество вершин
-    struct AdjList *A; // Массив списков смежных вершин для каждой вершины
+    int **A; // Матрица смежности
 };
 
 // Создаёт структуру граф с количеством вершин V
 struct Graph *create_graph(int V){
     struct Graph *G = malloc(sizeof(struct Graph));
     G -> V = V;
-    G -> A = calloc(V, sizeof(struct AdjList));
+    G -> A = malloc(V * sizeof(int *));
+    for (size_t i = 0; i < V; i++)
+        G -> A[i] = calloc(V, sizeof(int));
     return G;
 }
 
 // Удаляет структуру граф по адресу G
-void delete_graph(struct Graph *G){
+void delete_graph(struct Graph *G, int V){
+    for (size_t i = 0; i < V; i++)
+        free(G -> A[i]);
     free(G -> A);
     free(G);
 }
 
 int main(void){
     struct Graph *G = create_graph(5);
-    delete_graph(G);
+    delete_graph(G, 5);
     return 0;
 }
