@@ -31,6 +31,11 @@ void create_edge(struct Graph *G, int src, int dst, int wt){
     G -> A[dst][src] = wt;
 }
 
+// Удаляет ребро между вершинами src и dst
+void delete_edge(struct Graph *G, int src, int dst){
+    create_edge(G, src, dst, 0);
+}
+
 // Выводит граф по адресу G на экран в консоль
 void print_graph(struct Graph *G, int V){
     for (size_t i = 0; i < V; i++){
