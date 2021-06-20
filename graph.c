@@ -25,8 +25,19 @@ void delete_graph(struct Graph *G, int V){
     free(G);
 }
 
-int main(void){
-    struct Graph *G = create_graph(5);
-    delete_graph(G, 5);
-    return 0;
+// Создаёт ребро между вершинами src и dst с весом wt
+void create_edge(struct Graph *G, int src, int dst, int wt){
+    G -> A[src][dst] = wt;
+    G -> A[dst][src] = wt;
+}
+
+// Выводит граф по адресу G на экран в консоль
+void print_graph(struct Graph *G, int V){
+    for (size_t i = 0; i < V; i++){
+        printf("Vertex %i: ", i);
+        for (size_t j = 0; j < V; j++)
+            if (G -> A[i][j])
+                printf("-%i-> %i, ", G -> A[i][j], j);
+        putchar('\n');
+    }
 }
