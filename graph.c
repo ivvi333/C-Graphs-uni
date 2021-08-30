@@ -50,7 +50,7 @@ void input_graph(struct Graph *G){
     double root;
     int i = 0, j;
     for (i; i < V; i++){
-        scanf("%lf %lf", &(G -> X[i]), &(G -> Y[i]));
+        scanf("%*i %lf %lf", &(G -> X[i]), &(G -> Y[i]));
         j = i - 1;
         for (j; j >= 0; j--){
             root = sqrt(pow(G -> X[i] - G -> X[j], 2.0) + pow(G -> Y[i] - G -> Y[j], 2.0));
