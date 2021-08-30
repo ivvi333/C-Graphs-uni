@@ -23,7 +23,8 @@ struct Graph *create_graph(int V){
 }
 
 // Удаляет структуру граф по адресу G
-void delete_graph(struct Graph *G, int V){
+void delete_graph(struct Graph *G){
+    int V = G -> V;
     for (size_t i = 0; i < V; i++)
         free(G -> A[i]);
     free(G -> A);
@@ -59,7 +60,8 @@ void input_graph(struct Graph *G){
 }
 
 // Выводит граф по адресу G на экран в консоль
-void print_graph(struct Graph *G, int V){
+void print_graph(struct Graph *G){
+    int V = G -> V;
     for (size_t i = 0; i < V; i++){
         printf("Vertex %i: ", i);
         for (size_t j = 0; j < V; j++)
