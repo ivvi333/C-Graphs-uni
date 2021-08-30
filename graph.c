@@ -44,7 +44,7 @@ void delete_edge(struct Graph *G, int src, int dst){
     create_edge(G, src, dst, 0);
 }
 
-// Ввод графа с клавиатуры через координаты его вершин
+// Ввод графа по адресу G с клавиатуры через координаты его вершин
 void input_graph(struct Graph *G){
     int V = G -> V;
     double root;
