@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 // Структура граф
 struct Graph{
     int V; // Количество вершин
+    double *X; // Координаты вершин по x
+    double *Y; // Координаты вершин по y
     int **A; // Матрица смежности
 };
 
@@ -11,6 +14,8 @@ struct Graph{
 struct Graph *create_graph(int V){
     struct Graph *G = malloc(sizeof(struct Graph));
     G -> V = V;
+    G -> X = calloc(V, sizeof(double));
+    G -> Y = calloc(V, sizeof(double));
     G -> A = malloc(V * sizeof(int *));
     for (size_t i = 0; i < V; i++)
         G -> A[i] = calloc(V, sizeof(int));
@@ -22,6 +27,8 @@ void delete_graph(struct Graph *G, int V){
     for (size_t i = 0; i < V; i++)
         free(G -> A[i]);
     free(G -> A);
+    free(G -> X);
+    free(G -> Y);
     free(G);
 }
 
@@ -34,6 +41,21 @@ void create_edge(struct Graph *G, int src, int dst, int wt){
 // Удаляет ребро между вершинами src и dst
 void delete_edge(struct Graph *G, int src, int dst){
     create_edge(G, src, dst, 0);
+}
+
+// Ввод графа с клавиатуры через координаты его вершин
+void input_graph(struct Graph *G){
+    int V = G -> V;
+    double root;
+    size_t i = 0, j;
+    for (i; i < V; i++){
+        scanf("%lf %lf", &(G -> X[i]), &(G -> Y[i]));
+        j = i - 1;
+        for (j; j >= 0; j--){
+            root = sqrt(pow(G -> X[i] - G -> X[j], 2.0) + pow(G -> Y[i] - G -> Y[j], 2.0));
+            create_edge(G, i, j, (int) ceil(root));
+        }
+    }
 }
 
 // Выводит граф по адресу G на экран в консоль
