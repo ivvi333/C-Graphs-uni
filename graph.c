@@ -48,7 +48,7 @@ void delete_edge(struct Graph *G, int src, int dst){
 void input_graph(struct Graph *G){
     int V = G -> V;
     double root;
-    size_t i = 0, j;
+    int i = 0, j;
     for (i; i < V; i++){
         scanf("%lf %lf", &(G -> X[i]), &(G -> Y[i]));
         j = i - 1;
